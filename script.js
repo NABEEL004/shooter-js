@@ -224,10 +224,10 @@ function spawnEnemy() {
 
 var intervalID = setInterval(function () {
     spawnEnemy()
-},3000
+},7000
 )
 
 var timerID = setInterval(function () {
     timer.value += 1
     document.getElementById('duration').innerHTML = timer.value
-}, 7000)
+}, 1000)
