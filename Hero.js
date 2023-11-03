@@ -2,7 +2,7 @@ class Hero {
     constructor () {
         this.width = 32;
         this.height = 32;
-        this.velocity = 2;
+        this.velocity = 1;
         this.image = new Image()
         this.image.src = 'Archer-Green.png'
         this.frames = {

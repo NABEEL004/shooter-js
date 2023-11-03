@@ -16,3 +16,24 @@ canvas {
     image-rendering: -moz-crisp-edges;
     image-rendering: crisp-edges;
 }
+
+@media screen and (max-width: 1024px) {
+    canvas {
+        height: 480px;
+        width: 768px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    canvas {
+        height: 320px;
+        width: 512px;
+    }
+}
+
+@media screen and (max-width: 512px) {
+    canvas {
+        height: 240px;
+        width: 384px;
+    }
+}

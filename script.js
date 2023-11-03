@@ -6,7 +6,7 @@ canvas.width = 256;
 
 const projectiles = []
 const enemies = []
-var hearts = 3;
+var hearts = 5;
 var enemyCount = 1;
 let keysPressed = {}
 
