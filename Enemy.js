@@ -1,8 +1,8 @@
 class Enemy {
     constructor ({position = {x: 0, y: 0}}) {
         this.position = position
-        this.width = 64;
-        this.height = 64;
+        this.width = 16;
+        this.height = 16;
         this.velocity = { x: 0, y :0};
         this.angle = 0;
     }
@@ -18,7 +18,7 @@ class Enemy {
             hero.position.x - this.position.x
           )
         
-          const power = 1
+          const power = 0.5
           this.velocity.x = Math.cos(angle) * power
           this.velocity.y = Math.sin(angle) * power
 

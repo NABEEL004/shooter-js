@@ -8,3 +8,11 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+canvas {
+    height: 640px;
+    width: 1024px;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
