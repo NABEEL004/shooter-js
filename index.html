@@ -9,10 +9,27 @@
     <canvas id="myCanvas" style="border:1px solid #000000;">
         Game Screen
     </canvas>
+    <div id="lost">
+        <h2>You Fainted!</h2>
+        <p>Your Timing: <span id="duration"></span> s</p>
+        <p>High Score: <span id="record"></span> s</p>
+        <button id="restart">Try Again?</button>
+    </div>
+    <div id="buttons">
+        <div id="move">
+            <div><button id="up">⇧</button></div>
+            <div id="leftright"><button id="left">⇦</button><button id="right">⇨</button></div>
+            <div><button id="down">⇩</button></div>
+        </div>
+        <div id="shoot">
+            <button id="shootButton">Shoot</button>
+        </div>
+    </div>
 </body>
 </html>
 
 <script src="./Hero.js"></script>
 <script src="./Enemy.js"></script>
 <script src="./Projectile.js"></script>
+<script src="./Timer.js"></script>
 <script src="./script.js"></script>

@@ -9,7 +9,7 @@ class Hero {
             max: 4,
             current: 0,
             elapsed: 0,
-            hold: 5,
+            hold: 10,
             row: 0,
             column: 1
         }
@@ -19,6 +19,7 @@ class Hero {
     reset() {
         this.position = {x : canvas.width /2, y: canvas.height/2};
         this.draw();
+        this.direction = 'd'
     }
 
     draw() {

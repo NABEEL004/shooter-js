@@ -6,29 +6,26 @@ canvas.width = 256;
 
 const projectiles = []
 const enemies = []
-var hearts = 5;
+var hearts = 3;
 var enemyCount = 1;
 let keysPressed = {}
+var gameStarted = true
+var highScore = 0
 
 const hero = new Hero()
 const image = new Image()
+const timer = new Timer()
 image.src = './map2.png'
 
 function drawBackground() {
     c.fillStyle = 'orange';
     c.fillRect(0, 0, canvas.width, canvas.height);
-    
 }
 
 function animate() {
     c.drawImage(image, 0, 0)
-    for (let i = 0; i < hearts; i ++) {
-        c.fillStyle = 'red';
-        c.beginPath();
-        c.arc(8 + (i * 16), 8, 4, 0, 2 * Math.PI);
-        c.stroke();
-        c.fill()
-    }
+    if (gameStarted) {
+
     if (keysPressed['ArrowUp']) {
         hero.up()
     }
@@ -49,7 +46,7 @@ function animate() {
         projectiles[i].update()
         projectiles[i].draw()
         for (let j = enemies.length -1; j >= 0 ; j --) {
-            if (isCollision (projectiles[i], enemies[j], 0)) {
+            if (isCollision (projectiles[i], enemies[j], 8)) {
                 projectiles.splice(i,1);
                 enemies.splice(j,1);
                 break;
@@ -61,11 +58,27 @@ function animate() {
     for (let i = enemies.length - 1 ; i >= 0; i--){
         enemies[i].update()
         enemies[i].draw()
-        if (isCollision(enemies[i],hero, 8)) {
+        if (isCollision(enemies[i],hero, 20)) {
             enemies.splice(i,1);
             hearts -= 1;
         }
     }
+    timer.draw()
+    for (let i = 0; i < hearts; i ++) {
+        c.fillStyle = 'red';
+        c.beginPath();
+        c.arc(8 + (i * 16), 8, 4, 0, 2 * Math.PI);
+        c.stroke();
+        c.fill()
+    }
+    if (hearts == 0) {
+        gameStarted = false;
+        if (timer.value > highScore) {highScore = timer.value}
+        document.getElementById('record').innerHTML = highScore
+        document.getElementById('lost').style.display = 'flex';
+        clearInterval(timerID)
+    }
+}
     requestAnimationFrame(animate);
 }
 
@@ -110,6 +123,55 @@ document.addEventListener('keydown', (event) => {
     delete keysPressed[event.key];
  });
 
+ document.getElementById('restart').addEventListener('click', () => {start()})
+ document.addEventListener('touchstart', (evt) => {evt.preventDefault()})
+
+
+
+ document.getElementById('up').addEventListener('mousedown', () => {keysPressed['ArrowUp'] = true;})
+ document.getElementById('up').addEventListener('mouseup', () => {delete keysPressed['ArrowUp']})
+ document.getElementById('up').addEventListener('mouseleave', () => {delete keysPressed['ArrowUp']})
+ document.getElementById('up').addEventListener('touchstart', () => {keysPressed['ArrowUp'] = true})
+ document.getElementById('up').addEventListener('touchend', () => {delete keysPressed['ArrowUp']})
+
+ document.getElementById('down').addEventListener('mousedown', () => {keysPressed['ArrowDown'] = true})
+ document.getElementById('down').addEventListener('mouseup', () => {delete keysPressed['ArrowDown']})
+ document.getElementById('down').addEventListener('mouseleave', () => {delete keysPressed['ArrowDown']})
+ document.getElementById('down').addEventListener('touchstart', () => {keysPressed['ArrowDown'] = true})
+ document.getElementById('down').addEventListener('touchend', () => {delete keysPressed['ArrowDown']})
+ 
+ document.getElementById('left').addEventListener('mousedown', () => {keysPressed['ArrowLeft'] = true})
+ document.getElementById('left').addEventListener('mouseup', () => {delete keysPressed['ArrowLeft']})
+ document.getElementById('left').addEventListener('mouseleave', () => {delete keysPressed['ArrowLeft']})
+ document.getElementById('left').addEventListener('touchstart', () => {keysPressed['ArrowLeft'] = true})
+ document.getElementById('left').addEventListener('touchend', () => {delete keysPressed['ArrowLeft']})
+ 
+ document.getElementById('right').addEventListener('mousedown', () => {keysPressed['ArrowRight'] = true})
+ document.getElementById('right').addEventListener('mouseup', () => {delete keysPressed['ArrowRight']})
+ document.getElementById('right').addEventListener('mouseleave', () => {delete keysPressed['ArrowRight']})
+ document.getElementById('right').addEventListener('touchstart', () => {keysPressed['ArrowRight'] = true})
+ document.getElementById('right').addEventListener('touchend', () => {delete keysPressed['ArrowRight']})
+
+ document.getElementById('shootButton').addEventListener('mousedown', () => {hero.shoot()})
+
+
+
+ function start () {
+    document.getElementById('lost').style.display = 'none';
+    hearts = 3;
+    enemyCount = 1;
+    hero.reset();
+    projectiles.length = 0
+    enemies.length = []
+    timer.value = 0;
+    gameStarted = true;
+    timerID = setInterval(function () {
+        timer.value += 1
+        document.getElementById('duration').innerHTML = timer.value
+    }, 1000)
+    // animate();
+ }
+
 function outOfBounds (obj) {
         try{
             if (obj.position.y < 0 || 
@@ -133,8 +195,7 @@ function isCollision(object1, object2, offset) {
     return false
 }
 
-const intervalID = setInterval(function () {
-    // randomA = Math.random 
+function spawnEnemy() {
     for (let i = 0; i < enemyCount; i ++) {
         const randomSide = Math.floor(Math.random() * 4) + 1
         switch (randomSide){
@@ -160,5 +221,13 @@ const intervalID = setInterval(function () {
     }
     enemyCount += 1
 }
-    ,7000
+
+var intervalID = setInterval(function () {
+    spawnEnemy()
+},3000
 )
+
+var timerID = setInterval(function () {
+    timer.value += 1
+    document.getElementById('duration').innerHTML = timer.value
+}, 1000)

@@ -1,12 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none; /*Safari*/
+    -moz-user-select: none; /*Firefox*/
 }
 
 body {
+    height: 100vh;
+    width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    background-color: rgba(0,0,0,0.8);
 }
 
 canvas {
@@ -17,10 +27,113 @@ canvas {
     image-rendering: crisp-edges;
 }
 
+#lost {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left:50%;
+    transform: translateX(-50%) translateY(-50%);
+    height: 320px;
+    width: 512px;
+    /* display: flex; */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: bisque;
+    font-family: 'Pixelify Sans', monospace, sans-serif;
+    border-radius: 5px;
+    border: black 5px solid;
+    font-size: 1.2rem;
+}
+
+h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+button {
+    font-family: 'Pixelify Sans', monospace, sans-serif;
+    font-size: 1.5rem;
+    background-color: antiquewhite;
+    padding: 1rem 2rem;
+    margin-top: 1.5rem;
+    cursor: pointer;
+}
+
+#buttons {
+    display: none;
+    width: 100vw;
+    margin-top: 2rem;
+    justify-content: space-around;
+}
+
+#buttons button {
+    margin-top: 0;
+    padding:0;
+    background-color: gray;
+    color:white;
+    font-size: 2rem;
+}
+
+#move {
+    width: 150px;
+}
+
+#move div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#move button {
+    width: 50px;
+    height: 50px;
+}
+
+#move #leftright {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#shoot {
+    display: flex;
+    flex-direction: column;
+    align-items:center ;
+    justify-content: center;
+}
+
+#shoot button {
+    width: 120px;
+    height: 120px;
+    font-size: 1.5rem;
+    border-radius: 100%;
+}
+
+
 @media screen and (max-width: 1024px) {
     canvas {
         height: 480px;
         width: 768px;
+    }
+    #lost {
+        height: 240px;
+        width: 384px;
+        border-radius: 5px;
+        border: black 5px solid;
+        font-size: 1.1rem;
+    }
+    
+    h2 {
+        font-size: 2.2rem;
+        margin-bottom: 1.3rem;
+    }
+    
+    button {
+        font-size: 1.3rem;
+        padding: 0.7rem 1.5rem;
+        margin-top: 1.2rem;
     }
 }
 
@@ -29,11 +142,34 @@ canvas {
         height: 320px;
         width: 512px;
     }
+
+    #buttons {
+        display: flex;
+    }
 }
 
 @media screen and (max-width: 512px) {
     canvas {
         height: 240px;
         width: 384px;
+    }
+
+    #lost {
+        height: 160px;
+        width: 256px;
+        border-radius: 5px;
+        border: black 3px solid;
+        font-size: 0.8rem;
+    }
+    
+    h2 {
+        font-size: 1.3rem;
+        margin-bottom: 1.3rem;
+    }
+    
+    button {
+        font-size: 1rem;
+        padding: 0.5rem 1.2rem;
+        margin-top: 1.2rem;
     }
 }
