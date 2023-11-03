@@ -230,4 +230,4 @@ var intervalID = setInterval(function () {
 var timerID = setInterval(function () {
     timer.value += 1
     document.getElementById('duration').innerHTML = timer.value
-}, 1000)
+}, 7000)
